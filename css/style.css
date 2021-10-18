@@ -1,0 +1,80 @@
+html, body, .content{
+    height: 100%;
+}
+
+h1{
+text-align: center;
+}
+
+.canvas{
+    height: 70%;
+    width: 80%;
+    margin: auto;
+}
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.row{
+    flex: 1;
+    display: flex;
+    background-color: gray;
+}
+
+.box{
+    flex: 1;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+#option-panel{
+    display: flex;
+    flex-direction: column;
+    margin: 2% auto;
+    align-items: center;
+
+}
+
+.clear{
+    width: auto;
+    margin: 2% auto;
+}
+
+
+/* SLIDER CUSTOMIZATION */
+
+.slider {
+    /* remove default CSS */
+    -webkit-appearance: none; 
+    appearance: none;
+
+    width: 75%;
+    height: 25px;
+    background: #d3d3d3;
+    opacity: 0.7;
+  }
+
+.slider:hover{
+    opacity: 1;
+}
+
+/* Most web settings, mozilla settings */
+.slider::-webkit-slider-thumb, .slider::-moz-range-thumb{
+    /* remove default CSS */
+    -webkit-appearance: none; 
+    appearance: none;
+
+    width: 25px; 
+    height: 25px; 
+    background: red; 
+    cursor: pointer; 
+}
+
+/* Most browsers on hover, mozilla on hover */
+.slider::-moz-range-thumb:hover, .slider::-webkit-slider-thumb{
+    scale: 1.3;
+}
