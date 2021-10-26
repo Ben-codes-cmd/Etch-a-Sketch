@@ -1,26 +1,60 @@
 // Ben Jordan
 // 10/18/21
 
+const clear = document.querySelector(".clear");
+const canvas = document.querySelector(".canvas");
+const slider = document.querySelector(".slider");
+const colors = Array.from(document.querySelectorAll(".option"));
+const custom = document.querySelector("#custom");
+const resolution = document.querySelector(".option-panel p");
+
+let currentColor = 'red';
+let grid; // keep reference to grid element
+
+// assign events
+colors.forEach(color => color.addEventListener("click", setColor));
+custom.onchange = (e) => setCustomColor(e);
+
+clear.onclick = () => reset();
+
+slider.onchange = (e) => updateSlider(e);
+
+// initialize
+generate(16);
+
 function change(e){
-    e.stopPropagation();
-    e.target.style.backgroundColor = 'lightblue';
-    console.log("hovered!")
+    e.target.style.backgroundColor = currentColor;
+}
+
+function setColor(e){
+    currentColor = e.target.dataset.value;
+}
+
+function setCustomColor(e){
+    currentColor = e.target.value;
+}
+
+function updateSlider(e){
+    num = e.target.value;
+    let message = `Canvas Resolution: ${num}x${num}`
+    resize(num);
+    e.target.title = message;
+    resolution.innerHTML = message
+    
 }
 
 function reset(){
     let boxes = Array.from(document.querySelectorAll(".box"));
-    for(box in boxes){
-        boxes[box].style.backgroundColor = 'gray';
-    }
+    boxes.forEach(box => box.style.backgroundColor = 'gray');
 }
 
-function resize(val){
+function resize(size){
     canvas.removeChild(grid);
-    generate(val);
+    generate(size);
 }
 
-// create responsive nxn grid
 function generate(resolution){
+    // create responsive nxn grid
 
     // create a new grid div
     grid = document.createElement("div");
@@ -42,13 +76,3 @@ function generate(resolution){
         }
     }
 }
-let grid; // keep a reference to grid div
-const clear = document.querySelector(".clear");
-const canvas = document.querySelector(".canvas");
-const slider = document.querySelector(".slider");
-//set default 16x16 grid
-generate(slider.value);
-slider.oninput = function (){
-    resize(this.value);
-}
-clear.addEventListener("click", reset);
